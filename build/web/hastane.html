@@ -1,0 +1,536 @@
+
+<html>
+    <head>
+        <title>HASTANE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="jquery/jquery.mobile.min.css"
+              rel="stylesheet" type="text/css" />                                    
+        <script src="jquery/jquery-1.6.4.js"></script>
+        <script src="jquery/jquery.mobile.min.js"></script>
+        <script src="js/hastane.js"></script>
+        <script src="js/doktor.js"></script>
+        <script src="js/cookie.js" type="text/javascript"></script>
+        <link rel="shortcut icon" href="resimler/dovtor.png" /> 
+        <style>
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+                background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div data-role="page" id="pggiris" >
+            <div data-role="header" data-theme="a" >
+                <h1>Hastane</h1>
+                <a  data-theme="b" data-role="button" href="#pgdoktorgirisi"><img src="resimler/dokormuayenekaıtları1.png" align="left" height="20" width="20" />Doktor  Girişi</a>
+            </div>
+
+            <div data-role="content"> 
+                <div class="ui-grid-a" align="center" >
+                    <div class="ui-block-a" >
+                        <a>
+                        </a>
+                    </div>
+                    <div id="container" align="center">
+                        <input type="text" id="txttc" placeholder="TC Kimlik No " data-theme="e" autocomplete="on" />
+                        <input type="password"  id="txtkullanicisifre"  placeholder="Şifre"  data-theme="e" autocomplete="on" />
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a data-role="button" onclick="giris()" data-icon="home"  data-theme="b" data-corners="false" ><font size="2" color="white">Giriş</font>
+                                </a>
+                            </div>
+                            <div class="ui-block-b" >
+                                <a data-role="button" href="#pgkayit" data-icon="home" data-corners="false" data-theme="b" ><font size="2" color="white">Kayıt Ol</font></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" >
+                        <a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  data-role="page" id="pganasayfa" >
+            <div id="txtdoktoradsoyad" data-role="header" data-theme="a" >
+
+                <h1>HOŞGELDİNİZ</h1>
+                <a data-role="button" href="#pggiris"  > <img src="resimler/exit.png" align="left" height="15" width="15" />Çıkış</a>
+
+                <a data-theme="e" data-role="button" href="#pgrandevu"><img src="resimler/randevu.png" align="left" height="22" width="22" />Randevu Al</a>
+            </div>
+            <div  data-role="footer" class="ui-bar" data-position="fixed" align="center">		
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="#pgdoktorlistesi" data-theme="e"  ><img src="resimler/mail.png" align="left" height="15" width="15" />Doktora Mail Gönder</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-a" align="center">
+                    <div class="ui-block-a">
+                        <div class="icon-springboard">
+                            <a href="#pgteshisler" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/dovtor.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Teşhisler</font></span>
+                            </a>
+                        </div>
+                        <div class="icon-springboard">
+                            <a href="#pgmuayene" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/muayane.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Muayene Kayıtları</font></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="icon-springboard">
+                            <a href="#pgilaclar" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/ilaç.png" width=70 border=0  ><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >İlaç Bilgileri</font></span>
+                            </a>
+                        </div>
+                        <div class="icon-springboard">
+                            <a href="#pgboykilo" data-role="button" data-corners="false" >
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/boy.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Boy-Kilo Bilgileri</font></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="dialog" id="pgkayit">
+            <div data-role="header" data-theme="a">
+                <h1>Kayıt OL</h1>
+            </div>
+            <input type="text"  id="txttcno" placeholder="TC Kimlik Numaranızı Giriniz (XXXXXXXXXXX)" autocomplete="on">
+            <input type="text"  id="txtsifre" placeholder="Şifre" autocomplete="on" >
+            <input type="text"  id="txtadi" placeholder="Adı" autocomplete="on" >
+            <input type="text"  id="txtsoyadi" placeholder="Soyadı" autocomplete="on" >
+            <input type="text"  id="txtdogumtarihi" placeholder="Doğum Tarihi (Yıl/Ay/Gün)" autocomplete="on" >
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-role="button" data-corners="false" onclick="ekle()" data-theme="b" data-icon="check"  >Kayıt ol</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-role="button" data-corners="false" data-rel ="back" data-theme="c" data-icon="delete" >İptal</a>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgteshisler">
+            <div data-role="header">
+                <h1>Teşhisler</h1>
+                <a data-role="button" data-rel="back" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"> <img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstteshisler">
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgilacbilgisi">
+            <div data-role="header">
+                <h1>İlac Bilgisi</h1>
+                <a data-role="button" data-rel="back" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <ul data-role="listview" data-filter="false" data-inset="true" id="lstilaclistesi">
+            </ul>
+        </div>
+
+        <div data-role="page" id="pgilaclar">
+            <div data-role="header">
+                <h1>İlaçlar</h1>
+                <a data-role="button" href="#pganasayfa" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <ul data-role="listview" data-filter="false" data-inset="true" id="lstilaclar">
+            </ul>
+        </div>
+        <div data-role="page" id="pgmuayene">
+            <div data-role="header">
+                <h1>Muayene Kayıtları</h1>
+                <a data-role="button" href="#pganasayfa" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <ul data-role="listview" data-filter="false" data-inset="true" id="lstmuayene">
+            </ul>
+        </div>
+        <div data-role="page" id="pgboykilo">
+            <div data-role="header">
+                <h1>Boy-Kilo Bilgileri</h1>
+                <a data-role="button" href="#pganasayfa" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <ul data-role="listview" data-filter="false" data-inset="true" id="lstboykilo">
+            </ul>
+            <div data-role="footer" data-position="fixed" align="center" >
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a data-theme="e" data-role="button" href="#pgboykiloekle" > <img src="resimler/add.png" align="left" height="15" width="15" />Boy-Kilo Ekle</a>
+                </div>
+            </div>
+
+        </div>
+        <div data-role="dialog" id="pgboykiloekle">
+            <div data-role="header">
+                <h1>Boy-Kilo Ekle</h1>
+            </div>
+            <input type="text"  id="txtboy" placeholder="Boy" autocomplete="on">
+            <input type="text"  id="txtkilo" placeholder="Kilo" autocomplete="on" >
+            <label><font face="arial" size="2" color="white">Tarih Otomatik Şimdiki Zamanı Varsayacaktır</font></label>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-role="button" data-corners="false" onclick="kaydet()" data-theme="b" data-icon="check"  >Kaydet</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-role="button" data-corners="false" data-rel ="back" data-theme="c" data-icon="delete" >İptal</a>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktorlistesi">
+            <div data-role="header">
+                <h1>Doktor Listesi</h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstdoktorlistesi">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktoramesaj">
+            <div  data-role="header">
+                <h1 id="txtfriendname"></h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+
+            <div data-role="content">
+                <div  data-role="container">
+                    <ul data-theme="e" data-role="listview" data-filter="true" data-inset="true"  id="lstdoktoramesaj">
+
+                    </ul>
+                </div>
+            </div>
+            <div data-role="footer" data-theme="b" data-position="fixed" align="center" >
+                <div data-role="controlgroup" data-type="horizontal">
+                    <input type="text" data-theme="e" id="txtmessage"/>
+                    <a data-role="button" onclick="SendMessage()"  data-corners="false" data-theme="c"  data-rel="dialog">gönder</a>
+                </div>
+            </div>
+        </div> 
+        <div data-role="dialog" id="pgrandevu">
+            <div data-role="header">
+                <h1>Randevu</h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <a data-role="button" onclick="doktorgetir()">Doktor Getir</a>
+            </div>
+            <div data-role="content">
+                <div data-role="container" >
+                    <select name="select-choice-0" id="lstbolumler" ><option value="standard">Bölüm Seçin</option></select>
+                    <select name="select-choice-1" id="lstdoktorlar" ><option  value="standard">Doktor Seçin</option></select>
+                    <select name="select-choice-2" id="lsttarihler" >
+                        <option  value="standard">Tarih Seçin</option>
+                        <option  value="1">2016-05-05</option>
+                        <option  value="2">2016-05-06</option>
+                        <option  value="3">2016-05-07</option>
+                        <option  value="4">2016-05-08</option>
+                    </select>
+                    <select name="select-choice-3" id="lstsaatler" >
+                        <option  value="standard">Saat Seçin</option>
+                        <option  value="1">08:00</option>
+                        <option  value="2">09:00</option>
+                        <option  value="3">10:00</option>
+                        <option  value="4">11:00</option>
+                        <option  value="5">12:00</option>
+                        <option  value="6">13:00</option>
+                        <option  value="7">14:00</option>
+                        <option  value="8">15:00</option>
+                        <option  value="9">16:00</option>
+                    </select>
+                    <a data-role="button" onclick="randevual()" data-icon="home"  data-theme="b" data-corners="false" ><font size="2" color="white">Randevu Al</font>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktorgirisi" >
+            <div data-role="header" data-theme="a" >
+                <a data-theme="c"  data-role="button"  href="#pggiris"  ><img src="resimler/left.png" align="left" height="15" width="15" />Hasta Girişi</a>
+                <h1>DOKTOR GİRİŞİ</h1>
+            </div>
+
+            <div data-role="content"> 
+                <div class="ui-grid-a" align="center" >
+                    <div class="ui-block-a" >
+                        <a>
+                        </a>
+                    </div>
+                    <div id="container" align="center">
+                        <input type="text" id="txtdoktortc" placeholder="TC Kimlik No" data-theme="e" autocomplete="on" />
+                        <input type="password"  id="txtdoktorsifre"  placeholder="Şifre"  data-theme="e" autocomplete="on" />
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a data-role="button" onclick="doktorgirisi()" data-icon="home"  data-theme="b" data-corners="false" ><font size="2" color="white">Giriş</font>
+                                </a>
+                            </div>
+                            <div class="ui-block-b" >
+                                <a data-role="button" href="#pgdoktorkayit" data-icon="home" data-corners="false" data-theme="b" ><font size="2" color="white">Kayıt Ol</font></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" >
+                        <a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  data-role="page" id="pgdoktoranasayfa" >
+            <div data-role="header" data-theme="a" >
+
+                <h1>HOŞGELDİNİZ</h1>
+                <a data-role="button" href="#pgdoktorgirisi"  > <img src="resimler/exit.png" align="left" height="15" width="15" />Çıkış</a>
+
+                <a data-role="button" data-theme="c" href="#pgdoktorrandevuler"><img src="resimler/doktorrandevu.png" align="left" height="22" width="22" />Randevular</a>
+            </div>
+            <div  data-role="footer" class="ui-bar" data-position="fixed" align="center">		
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="#pgdoktormailler" data-theme="e"  ><img src="resimler/mail.png" align="left" height="15" width="15" />Mailler</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-a" align="center">
+                    <div class="ui-block-a">
+                        <div class="icon-springboard">
+                            <a href="#pghastalarım" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/hasta.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Hastalarım</font></span>
+                            </a>
+                        </div>
+                        <div class="icon-springboard">
+                            <a href="#pgdoktormuayene" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/dokormuayenekaıtları1.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Muayene Kayıtları</font></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="icon-springboard">
+                            <a href="#pgdoktorilaclar" data-role="button" data-corners="false">
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/ilaçlar.png" width=70 border=0  ><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >İlaçlar</font></span>
+                            </a>
+                        </div>
+                        <div class="icon-springboard">
+                            <a href="#pgmuayeneedilmemishastalar" data-role="button" data-corners="false" >
+                                <IMG onmouseover="this.height = 100;
+                                        this.width = 100;" onmouseout="this.height = 70;
+                                                this.width = 70;" height=70 src="resimler/muayeneedilmemişhasta.png" width=70 border=0><br>
+                                <span class="icon-label" ><font size="2" face="arial" color="black" >Muayene Edilecek Hastalar </font></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktormuayene">
+            <div data-role="header">
+                <h1>Hasta Muayene</h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstmuayenehasta">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="pghastalar">
+            <div data-role="header">
+                <h1>Hasta Listesi</h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lsthastalar">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="pgdoktorrandevuler">
+            <div data-role="header">
+                <h1>Randevuler</h1>
+                <a data-theme="c"  data-role="button"  href="#pgdoktoranasayfa"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstdoktorrandevuler">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="dialog" id="pgconfirm">
+            <div data-role="header">
+                <h1>Muayene Onay</h1>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a data-role="button" onclick="muayeneyeal(true)" data-corners="false" data-theme="e" ><img src="resimler/add.png" align="left" height="25" width="25" />Muayeneye Al</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" data-rel="back" data-corners="false"  data-theme="a" ><img src="resimler/exit.png" align="left" height="25" width="25" />İptal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktorilaclar">
+            <div data-role="header">
+                <h1>İlaçlar</h1>
+                <a data-role="button" data-rel="back" data-theme="c"><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <ul data-role="listview" data-filter="false" data-inset="true" id="lstdoktorilaclar">
+            </ul>
+            <div data-role="footer" class="ui-bar"  align="center" >
+                <a data-theme="e" href="#pgilacekle"  data-role="button"><img src="resimler/add.png" align="left" height="18" width="18" />Ilaç Ekle</a>
+            </div>
+        </div>
+        <div data-role="dialog" id="pgilacekle">
+            <div data-role="header">
+                <h1>İlaç Ekle</h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+            </div>
+            <input type="text"  id="txtilacadi" placeholder="İlacın Adı" autocomplete="on">
+            <input type="text"  id="txtacliktokluk" placeholder="Açlık -Tokluk" autocomplete="on" >
+            <input type="text"  id="txtvakit" placeholder="Alınması Gereken Vakit" autocomplete="on" >
+            <input type="text"  id="txtkullanmasuresi" placeholder="Kullanmasüresi" autocomplete="on" >
+            <input type="text"  id="txtyanetkileri" placeholder="Yan Etkileri" autocomplete="on" >
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-role="button" data-corners="false" onclick="ilacekle()" data-theme="b" data-icon="check"  >Ekle</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-role="button" data-corners="false" data-rel ="back" data-theme="c" data-icon="delete" >İptal</a>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgmuayeneedilmemishastalar">
+            <div data-role="header">
+                <h1>Muayene Edilecek Hastalar</h1>
+                <a data-theme="c"  data-role="button"  href="#pgdoktoranasayfa"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstmuayeneedilmemishastalar">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="dialog" id="pgteshisekle">
+            <div data-role="header">
+                <h1>Teşhis Ekle</h1>
+            </div>
+            <input type="text"  id="txtteshis" placeholder="Teşhis Girin..." autocomplete="on">
+            <select name="select-choice-10" id="lstilacclar" ><option value="standard">İlaç Seçin</option></select>
+            <div data-role="content">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a data-role="button" onclick="onayla()" data-corners="false" data-theme="e" ><img src="resimler/add.png" align="left" height="25" width="25" />Kaydet</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" data-rel="back" data-corners="false"  data-theme="a" ><img src="resimler/exit.png" align="left" height="25" width="25" />İptal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pghastalarım">
+            <div data-role="header">
+                <h1>HASTALARIM</h1>
+                <a data-theme="c"  data-role="button"  href="#pgdoktoranasayfa"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lsthastalarım">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pgdoktormailler">
+            <div data-role="header">
+                <h1>Hasta Listesi</h1>
+                <a data-theme="c"  data-role="button"  href="#pgdoktoranasayfa"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <a data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+            <div data-role="content">
+                <div data-role="container">
+                    <ul data-role="listview" data-filter="true" data-inset="true" id="lstdoktormailler">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="pghastayamesaj">
+            <div  data-role="header">
+                <h1 id="txtfriendname"></h1>
+                <a data-theme="c"  data-role="button"  data-rel="back"  ><img src="resimler/left.png" align="left" height="15" width="15" />Geri</a>
+                <A data-theme="c" HREF="javascript:history.go(0)"><img src="resimler/refresh.png" align="left" height="15" width="15" />Yenile</A>
+            </div>
+
+            <div data-role="content">
+                <div  data-role="container">
+                    <ul data-theme="e" data-role="listview" data-filter="true" data-inset="true"  id="lsthastayamesaj">
+
+                    </ul>
+                </div>
+            </div>
+            <div data-role="footer" data-theme="b" data-position="fixed" align="center" >
+                <div data-role="controlgroup" data-type="horizontal">
+                    <input type="text" data-theme="e" id="txtmessage"/>
+                    <a data-role="button" onclick="SendMessage()"  data-corners="false" data-theme="c"  data-rel="dialog">Mesaj Gönder</a>
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
